@@ -38,3 +38,7 @@ def get_run(run_id):
 
 def cancel_run(run_id):
     return get_jobs_client().cancel_run(run_id)
+
+
+def get_run_output(run_id):
+    return get_jobs_client().get_run_output(run_id)

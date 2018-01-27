@@ -28,7 +28,7 @@ from databricks_cli.click_types import OutputClickType, JsonClickType, RunIdClic
 from databricks_cli.utils import eat_exceptions, CONTEXT_SETTINGS, pretty_format, json_cli_base, \
     truncate_string
 from databricks_cli.configure.config import require_config
-from databricks_cli.runs.api import submit_run, list_runs, get_run, cancel_run
+from databricks_cli.runs.api import submit_run, list_runs, get_run, cancel_run, get_run_output
 from databricks_cli.version import print_version_callback, version
 
 
@@ -124,6 +124,15 @@ def cancel_cli(run_id):
     """
     click.echo(pretty_format(cancel_run(run_id)))
 
+@click.command(context_settings=CONTEXT_SETTINGS)
+@click.option('--run-id', required=True, type=RunIdClickType())
+@require_config
+@eat_exceptions
+def output_cli(run_id):
+    """
+    Get the run output
+    """
+    click.echo(pretty_format(get_run_output(run_id)))
 
 @click.group(context_settings=CONTEXT_SETTINGS,
              short_help='Utility to interact with the jobs runs.')
@@ -142,3 +151,4 @@ runs_group.add_command(submit_cli, name='submit')
 runs_group.add_command(list_cli, name='list')
 runs_group.add_command(get_cli, name='get')
 runs_group.add_command(cancel_cli, name='cancel')
+runs_group.add_command(output_cli, name='output')

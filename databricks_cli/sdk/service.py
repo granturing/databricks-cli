@@ -164,7 +164,12 @@ class JobsService(object):
         if run_id is not None:
             _data['run_id'] = run_id
         return self.client.perform_query('POST', '/jobs/runs/cancel', data=_data)
-     
+    
+    def get_run_output(self, run_id=None):
+        _data = {}
+        if run_id is not None:
+            _data['run_id'] = run_id
+        return self.client.perform_query('GET', '/jobs/runs/output', data=_data)
 
 class ClusterService(object):
     def __init__(self, client):
