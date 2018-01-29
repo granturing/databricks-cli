@@ -88,3 +88,17 @@ def test_cancel_cli():
             get_callback(cli.cancel_cli)(1)
             assert cancel_run_mock.call_args[0][0] == 1
             assert echo_mock.call_args[0][0] == pretty_format({})
+
+RUN_OUTPUT_RETURN = {
+    'notebook_output': {
+        'result': '100'
+    }
+}
+
+def test_get_run_output_cli():
+    with mock.patch('databricks_cli.runs.cli.get_run_output') as get_run_output_mock:
+        with mock.patch('databricks_cli.runs.cli.click.echo') as echo_mock:
+            get_run_output_mock.return_value = RUN_OUTPUT_RETURN
+            get_callback(cli.output_cli)(1)
+            assert get_run_output_mock.call_args[0][0] == 1
+            assert echo_mock.call_args[0][0] == pretty_format(RUN_OUTPUT_RETURN)
