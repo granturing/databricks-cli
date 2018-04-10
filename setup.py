@@ -39,10 +39,14 @@ setup(
         'six>=1.10.0',
         'configparser >= 0.3.5'
     ],
+    extras_requires={
+        'git': ['gitpython']
+    },
     entry_points='''
         [console_scripts]
         databricks=databricks_cli.cli:cli
         dbfs=databricks_cli.dbfs.cli:dbfs_group
+        git-databricks=databricks_cli.git.cli:git_group
     ''',
     zip_safe=False,
     author='Andrew Chen',
