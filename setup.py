@@ -39,7 +39,7 @@ setup(
         'six>=1.10.0',
         'configparser >= 0.3.5'
     ],
-    extras_requires={
+    extras_require={
         'git': ['gitpython']
     },
     entry_points='''
