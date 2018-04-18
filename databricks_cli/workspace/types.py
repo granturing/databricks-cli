@@ -30,18 +30,18 @@ class WorkspaceLanguage(object):
     SQL = 'SQL'
     R = 'R'
     ALL = [SCALA, PYTHON, SQL, R]
-    EXTENSIONS = ['.scala', '.py', '.sql', '.SQL', '.r', '.R', '.ipynb']
+    EXTENSIONS = ['.scala', '.py', '.sql', '.SQL', '.R', '.ipynb']
 
     @classmethod
     def to_language_and_format(cls, path):
-        ext = cls.get_extension(path).lower()
+        ext = cls.get_extension(path)
         if ext == '.scala':
             return (cls.SCALA, WorkspaceFormat.SOURCE)
         elif ext == '.py':
             return (cls.PYTHON, WorkspaceFormat.SOURCE)
         elif ext == '.sql':
             return (cls.SQL, WorkspaceFormat.SOURCE)
-        elif ext == '.r':
+        elif ext == '.R':
             return (cls.R, WorkspaceFormat.SOURCE)
         elif ext == '.ipynb':
             return (cls.PYTHON, WorkspaceFormat.JUPYTER)
@@ -55,7 +55,7 @@ class WorkspaceLanguage(object):
         elif language == cls.SQL:
             return '.sql'
         elif language == cls.R:
-            return '.r'
+            return '.R'
 
     @classmethod
     def get_extension(cls, path):
